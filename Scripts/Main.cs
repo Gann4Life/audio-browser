@@ -11,6 +11,8 @@ public partial class Main : Control
     
     public override void _Ready()
     {
+        DisplayServer.WindowSetFlag(DisplayServer.WindowFlags.Borderless, true);
+        
         FileBrowser.DirSelected += FileBrowserOnDirSelected;
         BtnBrowse.Pressed += () => FileBrowser.Show();
     }

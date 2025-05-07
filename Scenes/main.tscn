@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://c57cufrhltr2j"]
+[gd_scene load_steps=8 format=3 uid="uid://c57cufrhltr2j"]
 
 [ext_resource type="Script" uid="uid://blgesxvqikbd6" path="res://Scripts/Main.cs" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bs32f6elaj6e0" path="res://Scenes/button_text.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://dwu5y4jtilowd" path="res://Scripts/AudioFileManager.cs" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://bp5yqn6uu7me7" path="res://Scripts/PlaybackSettings.cs" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://beoccwudk4pix" path="res://Scripts/WarningDialogs.cs" id="4_kry3j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kry3j"]
+bg_color = Color(0.493545, 0.493546, 0.493545, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21xkr"]
+bg_color = Color(0.158472, 0.158472, 0.158472, 1)
 
 [node name="Main" type="Control" node_paths=PackedStringArray("FileBrowser", "BtnBrowse")]
 layout_mode = 3
@@ -15,7 +21,146 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bo1nx")
 FileBrowser = NodePath("FileDialog")
-BtnBrowse = NodePath("HSplitContainer/Control/Browse")
+BtnBrowse = NodePath("Panel/MarginContainer/HSplitContainer/Control/Browse")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kry3j")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+split_offset = 380
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_21xkr")
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HSplitContainer/ScrollContainer" node_paths=PackedStringArray("StreamPlayer")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_8gbba")
+StreamPlayer = NodePath("../../../../../AudioStreamPlayer")
+ButtonTemplate = ExtResource("1_jjgbg")
+
+[node name="Button" parent="Panel/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
+layout_mode = 2
+
+[node name="Button2" parent="Panel/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
+layout_mode = 2
+
+[node name="Button3" parent="Panel/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
+layout_mode = 2
+
+[node name="Button4" parent="Panel/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
+layout_mode = 2
+
+[node name="Button5" parent="Panel/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
+layout_mode = 2
+
+[node name="Button6" parent="Panel/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
+layout_mode = 2
+
+[node name="Button7" parent="Panel/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
+layout_mode = 2
+
+[node name="Button8" parent="Panel/MarginContainer/HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Panel/MarginContainer/HSplitContainer"]
+layout_mode = 2
+script = ExtResource("4_jjvhh")
+
+[node name="Recursive" type="CheckBox" parent="Panel/MarginContainer/HSplitContainer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -172.0
+offset_right = -168.0
+offset_bottom = -148.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/HSplitContainer/Control/Recursive"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -11.5
+offset_right = 77.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "Recursive"
+
+[node name="Loop" type="CheckBox" parent="Panel/MarginContainer/HSplitContainer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -204.0
+offset_right = -168.0
+offset_bottom = -180.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/HSplitContainer/Control/Loop"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -11.5
+offset_right = 77.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "Loop"
+
+[node name="Browse" parent="Panel/MarginContainer/HSplitContainer/Control" instance=ExtResource("1_jjgbg")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_top = 24.0
+offset_right = -28.0
+offset_bottom = 67.0
+grow_horizontal = 0
+
+[node name="Label" parent="Panel/MarginContainer/HSplitContainer/Control/Browse" index="0"]
+text = "Browse..."
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -33,131 +178,4 @@ initial_position = 2
 size = Vector2i(405, 106)
 script = ExtResource("4_kry3j")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-split_offset = 265
-
-[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="Panel" type="Panel" parent="HSplitContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer" node_paths=PackedStringArray("StreamPlayer")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("3_8gbba")
-StreamPlayer = NodePath("../../../AudioStreamPlayer")
-ButtonTemplate = ExtResource("1_jjgbg")
-
-[node name="Button" parent="HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
-layout_mode = 2
-
-[node name="Button2" parent="HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
-layout_mode = 2
-
-[node name="Button3" parent="HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
-layout_mode = 2
-
-[node name="Button4" parent="HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
-layout_mode = 2
-
-[node name="Button5" parent="HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
-layout_mode = 2
-
-[node name="Button6" parent="HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
-layout_mode = 2
-
-[node name="Button7" parent="HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
-layout_mode = 2
-
-[node name="Button8" parent="HSplitContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_jjgbg")]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="HSplitContainer"]
-layout_mode = 2
-script = ExtResource("4_jjvhh")
-
-[node name="Recursive" type="CheckBox" parent="HSplitContainer/Control"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -192.0
-offset_top = -172.0
-offset_right = -168.0
-offset_bottom = -148.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="HSplitContainer/Control/Recursive"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 2.0
-offset_top = -11.5
-offset_right = 77.0
-offset_bottom = 11.5
-grow_horizontal = 0
-grow_vertical = 2
-text = "Recursive"
-
-[node name="Loop" type="CheckBox" parent="HSplitContainer/Control"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -192.0
-offset_top = -204.0
-offset_right = -168.0
-offset_bottom = -180.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="HSplitContainer/Control/Loop"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 2.0
-offset_top = -11.5
-offset_right = 77.0
-offset_bottom = 11.5
-grow_horizontal = 0
-grow_vertical = 2
-text = "Loop"
-
-[node name="Browse" parent="HSplitContainer/Control" instance=ExtResource("1_jjgbg")]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -208.0
-offset_top = 24.0
-offset_right = -28.0
-offset_bottom = 67.0
-grow_horizontal = 0
-
-[node name="Label" parent="HSplitContainer/Control/Browse" index="0"]
-text = "Browse..."
-
-[editable path="HSplitContainer/Control/Browse"]
+[editable path="Panel/MarginContainer/HSplitContainer/Control/Browse"]
